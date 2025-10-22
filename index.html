@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduling Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">CPU Scheduling Simulator</h1>
+        
+        <div class="main-content">
+            <!-- Left Panel - Input Section -->
+            <div class="input-panel">
+                <div class="panel-header">Process Input</div>
+                
+                <!-- Algorithm Selection -->
+                <div class="form-group">
+                    <label for="algorithm">Algorithm:</label>
+                    <select id="algorithm" class="form-control">
+                        <option value="FCFS">FCFS</option>
+                        <option value="SJF">SJF</option>
+                        <option value="RR">Round Robin</option>
+                    </select>
+                </div>
+                
+                <!-- Process Input Fields -->
+                <div class="form-group">
+                    <label for="processId">Process ID:</label>
+                    <input type="text" id="processId" class="form-control" placeholder="e.g., P1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="burstTime">Burst Time:</label>
+                    <input type="number" id="burstTime" class="form-control" min="1" placeholder="e.g., 5">
+                </div>
+                
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button class="btn btn-success" onclick="addProcess()">Add Process</button>
+                    <button class="btn btn-danger" onclick="clearAll()">Clear All</button>
+                    <button class="btn btn-primary" onclick="runSimulation()">Run Simulation</button>
+                </div>
+                
+                <!-- Process List -->
+                <div class="process-list-container">
+                    <div class="list-header">Added Processes</div>
+                    <div id="processList" class="process-list"></div>
+                </div>
+            </div>
+            
+            <!-- Right Panel - Visualization Section -->
+            <div class="visualization-panel">
+                <div class="panel-header">Process Execution Visualization</div>
+                
+                <!-- Gantt Chart -->
+                <div class="gantt-container">
+                    <canvas id="ganttChart" width="800" height="200"></canvas>
+                </div>
+                
+                <!-- Results Table -->
+                <div class="results-container">
+                    <div class="results-header">Results</div>
+                    <div class="table-wrapper">
+                        <table id="resultsTable">
+                            <thead>
+                                <tr>
+                                    <th>Process ID</th>
+                                    <th>Burst Time</th>
+                                    <th>Waiting Time</th>
+                                    <th>Turnaround Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsBody">
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Average Times -->
+                    <div id="averageTimes" class="average-times">
+                        Run simulation to see average times
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Time Quantum Modal -->
+    <div id="quantumModal" class="modal">
+        <div class="modal-content">
+            <h3>Time Quantum</h3>
+            <p>Enter Time Quantum for Round Robin:</p>
+            <input type="number" id="timeQuantum" class="form-control" value="2" min="1">
+            <div class="modal-buttons">
+                <button class="btn btn-primary" onclick="confirmQuantum()">OK</button>
+                <button class="btn btn-secondary" onclick="closeQuantumModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
